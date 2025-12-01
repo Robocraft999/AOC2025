@@ -31,5 +31,5 @@ go.work.sum
 .idea/
 # .vscode/
 
+*input.txt
 session.txt
-input.txt
