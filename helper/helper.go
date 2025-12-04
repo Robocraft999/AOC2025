@@ -1,7 +1,77 @@
 package helper
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func Test() {
 	fmt.Println("Helper Test")
+}
+
+func PrintGrid(grid [][]string) {
+	for _, row := range grid {
+		fmt.Println(row)
+	}
+}
+
+func MakeGridFromLines(lines []string) [][]string {
+	grid := make([][]string, len(lines))
+	for i, line := range lines {
+		grid[i] = strings.Split(line, "")
+	}
+	return grid
+}
+
+func CountNeighbours8(grid [][]string, x, y int) int {
+	count := 0
+	height := len(grid)
+	width := len(grid[0])
+	if x > 0 && y > 0 && grid[y-1][x-1] == "@" {
+		count++
+	}
+	if x > 0 && grid[y][x-1] == "@" {
+		count++
+	}
+	if x > 0 && y < height-1 && grid[y+1][x-1] == "@" {
+		count++
+	}
+
+	if y > 0 && grid[y-1][x] == "@" {
+		count++
+	}
+	if y < height-1 && grid[y+1][x] == "@" {
+		count++
+	}
+
+	if x < width-1 && y > 0 && grid[y-1][x+1] == "@" {
+		count++
+	}
+	if x < width-1 && grid[y][x+1] == "@" {
+		count++
+	}
+	if x < width-1 && y < height-1 && grid[y+1][x+1] == "@" {
+		count++
+	}
+	return count
+}
+
+func CountNeighbours4(grid [][]string, x, y int) int {
+	count := 0
+	height := len(grid)
+	width := len(grid[0])
+
+	if x > 0 && grid[y][x-1] == "@" {
+		count++
+	}
+	if y > 0 && grid[y-1][x] == "@" {
+		count++
+	}
+	if y < height-1 && grid[y+1][x] == "@" {
+		count++
+	}
+	if x < width-1 && grid[y][x+1] == "@" {
+		count++
+	}
+	return count
 }
