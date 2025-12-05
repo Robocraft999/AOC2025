@@ -15,7 +15,7 @@ func main() {
 }
 
 func checkPos(grid [][]string, x, y int) bool {
-	return helper.CountNeighbours8(grid, x, y) < 4
+	return helper.CountNeighbours8(grid, x, y, "@") < 4
 }
 
 func part1(input string) {

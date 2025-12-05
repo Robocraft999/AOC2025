@@ -23,54 +23,54 @@ func MakeGridFromLines(lines []string) [][]string {
 	return grid
 }
 
-func CountNeighbours8(grid [][]string, x, y int) int {
+func CountNeighbours8(grid [][]string, x, y int, search string) int {
 	count := 0
 	height := len(grid)
 	width := len(grid[0])
-	if x > 0 && y > 0 && grid[y-1][x-1] == "@" {
+	if x > 0 && y > 0 && grid[y-1][x-1] == search {
 		count++
 	}
-	if x > 0 && grid[y][x-1] == "@" {
+	if x > 0 && grid[y][x-1] == search {
 		count++
 	}
-	if x > 0 && y < height-1 && grid[y+1][x-1] == "@" {
-		count++
-	}
-
-	if y > 0 && grid[y-1][x] == "@" {
-		count++
-	}
-	if y < height-1 && grid[y+1][x] == "@" {
+	if x > 0 && y < height-1 && grid[y+1][x-1] == search {
 		count++
 	}
 
-	if x < width-1 && y > 0 && grid[y-1][x+1] == "@" {
+	if y > 0 && grid[y-1][x] == search {
 		count++
 	}
-	if x < width-1 && grid[y][x+1] == "@" {
+	if y < height-1 && grid[y+1][x] == search {
 		count++
 	}
-	if x < width-1 && y < height-1 && grid[y+1][x+1] == "@" {
+
+	if x < width-1 && y > 0 && grid[y-1][x+1] == search {
+		count++
+	}
+	if x < width-1 && grid[y][x+1] == search {
+		count++
+	}
+	if x < width-1 && y < height-1 && grid[y+1][x+1] == search {
 		count++
 	}
 	return count
 }
 
-func CountNeighbours4(grid [][]string, x, y int) int {
+func CountNeighbours4(grid [][]string, x, y int, search string) int {
 	count := 0
 	height := len(grid)
 	width := len(grid[0])
 
-	if x > 0 && grid[y][x-1] == "@" {
+	if x > 0 && grid[y][x-1] == search {
 		count++
 	}
-	if y > 0 && grid[y-1][x] == "@" {
+	if y > 0 && grid[y-1][x] == search {
 		count++
 	}
-	if y < height-1 && grid[y+1][x] == "@" {
+	if y < height-1 && grid[y+1][x] == search {
 		count++
 	}
-	if x < width-1 && grid[y][x+1] == "@" {
+	if x < width-1 && grid[y][x+1] == search {
 		count++
 	}
 	return count
