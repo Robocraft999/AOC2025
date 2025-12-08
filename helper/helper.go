@@ -2,6 +2,7 @@ package helper
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -13,6 +14,13 @@ func PrintGrid(grid [][]string) {
 	for _, row := range grid {
 		fmt.Println(row)
 	}
+}
+
+func EuclideanDistance(pos1 [3]int, pos2 [3]int) float64 {
+	a := math.Pow(float64(pos1[0]-pos2[0]), 2)
+	b := math.Pow(float64(pos1[1]-pos2[1]), 2)
+	c := math.Pow(float64(pos1[2]-pos2[2]), 2)
+	return math.Sqrt(a + b + c)
 }
 
 func MakeGridFromLines(lines []string) [][]string {
