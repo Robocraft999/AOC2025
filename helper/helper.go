@@ -16,6 +16,27 @@ func PrintGrid(grid [][]string) {
 	}
 }
 
+func AbsInt(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func IsInBounds2d(b1, b2, p [2]int) bool {
+	if b2[0] > b1[0] && (p[0] <= b1[0] || p[0] >= b2[0]) {
+		return false
+	} else if b2[0] < b1[0] && (p[0] <= b2[0] || p[0] >= b1[0]) {
+		return false
+	}
+	if b2[1] > b1[1] && (p[1] <= b1[1] || p[1] >= b2[1]) {
+		return false
+	} else if b2[1] < b1[1] && (p[1] <= b2[1] || p[1] >= b1[1]) {
+		return false
+	}
+	return true
+}
+
 func EuclideanDistance(pos1 [3]int, pos2 [3]int) float64 {
 	a := math.Pow(float64(pos1[0]-pos2[0]), 2)
 	b := math.Pow(float64(pos1[1]-pos2[1]), 2)
