@@ -72,6 +72,20 @@ func IsInBounds2d(b1, b2, p [2]int) bool {
 	return true
 }
 
+func IsInBounds2d2(b1, b2, p [2]int) bool {
+	xIn := (b1[0]-p[0] < 0) != (b2[0]-p[0] < 0)
+	yIn := (b1[1]-p[1] < 0) != (b2[1]-p[1] < 0)
+	return xIn && yIn
+}
+
+func RectLineIntersect2d2(b1, b2, l1, l2 [2]int) bool {
+	xIn1 := (b1[0]-l1[0] <= 0) != (b2[0]-l1[0] <= 0)
+	xIn2 := (b1[0]-l2[0] <= 0) != (b2[0]-l2[0] <= 0)
+	yIn1 := (b1[1]-l1[1] <= 0) != (b2[1]-l1[1] <= 0)
+	yIn2 := (b1[1]-l2[1] <= 0) != (b2[1]-l2[1] <= 0)
+	return (xIn1 != xIn2) != (yIn1 != yIn2)
+}
+
 func EuclideanDistance(pos1 [3]int, pos2 [3]int) float64 {
 	a := math.Pow(float64(pos1[0]-pos2[0]), 2)
 	b := math.Pow(float64(pos1[1]-pos2[1]), 2)
