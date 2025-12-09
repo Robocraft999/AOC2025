@@ -16,6 +16,41 @@ func PrintGrid(grid [][]string) {
 	}
 }
 
+func RealLineIntersect2d(l1p1, l1p2, l2p1, l2p2 [2]int) bool {
+	horizontalL1 := l1p1[1] == l1p2[1]
+	horizontalL2 := l2p1[1] == l2p2[1]
+	if horizontalL1 == horizontalL2 {
+		return false
+	}
+	if horizontalL1 {
+		l2x := l2p1[0]
+		if (l1p1[0] <= l2x && l1p2[0] <= l2x) || (l1p1[0] >= l2x && l1p2[0] >= l2x) {
+			return false
+		}
+		return (l2p1[1]-l1p1[1])*(l2p2[1]-l1p1[1]) < 0
+	}
+	if horizontalL2 {
+		l1x := l1p1[0]
+		if (l2p1[0] <= l1x && l2p2[0] <= l1x) || (l2p1[0] >= l1x && l2p2[0] >= l1x) {
+			return false
+		}
+		return (l1p1[1]-l2p1[1])*(l1p2[1]-l2p1[1]) < 0
+	}
+	panic("unreachable")
+	return false
+}
+
+func RectLineIntersect2d(b1, b2, l1, l2 [2]int) bool {
+	p1 := b1
+	p2 := b2
+	p3 := [2]int{b1[0], b2[1]}
+	p4 := [2]int{b2[0], b1[1]}
+	if RealLineIntersect2d(p1, p3, l1, l2) || RealLineIntersect2d(p2, p4, l1, l2) || RealLineIntersect2d(p1, p4, l1, l2) || RealLineIntersect2d(p2, p3, l1, l2) {
+		return true
+	}
+	return false
+}
+
 func AbsInt(x int) int {
 	if x < 0 {
 		return -x
