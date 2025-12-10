@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math"
 	"strings"
+
+	"example.com/helper/set"
 )
 
 func Test() {
@@ -56,6 +58,10 @@ func AbsInt(x int) int {
 		return -x
 	}
 	return x
+}
+
+func PowInt(x, y int) int {
+	return int(math.Pow(float64(x), float64(y)))
 }
 
 func IsInBounds2d(b1, b2, p [2]int) bool {
@@ -132,6 +138,31 @@ func CountNeighbours8(grid [][]string, x, y int, search string) int {
 		count++
 	}
 	return count
+}
+
+func PathLength(start, end [2]int, validator func([2]int) bool) int {
+	visited := set.NewEmptySet[[2]int]()
+	toProcess := [][3]int{{start[0], start[1], 0}}
+	for len(toProcess) > 0 {
+		current := toProcess[0]
+		toProcess = toProcess[1:]
+		c, f := [2]int{current[0], current[1]}, current[2]
+		if c == end {
+			return f
+		}
+		dirs := [4][2]int{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
+		for _, dir := range dirs {
+			npx, npy := c[0]+dir[0], c[1]+dir[1]
+			newPos := [2]int{npx, npy}
+			if validator(newPos) {
+				if !visited.Contains(newPos) {
+					toProcess = append(toProcess, [3]int{newPos[0], newPos[1], f + 1})
+				}
+			}
+		}
+		visited.Add(c)
+	}
+	return -1
 }
 
 func CountNeighbours4(grid [][]string, x, y int, search string) int {
